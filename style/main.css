@@ -1,0 +1,182 @@
+.container, .tablejovem {
+    margin-top: 25px;
+}
+
+.tablejovem tbody tr{
+    background-color: #FFF;
+}
+
+.tablejovem thead tr{
+    /* border: 4px solid #ECEEEF; */
+    background-color: #4682B4;
+    border-bottom: 4px solid #ECEEEF;
+    height: 40px;
+}
+.tablejovem thead tr th{
+    padding: 5px;
+    color: #ECEEEF;
+}
+.tablejovem tbody tr{
+    height: 40px;
+    border: 1px solid #ECEEEF;
+}
+.tablejovem tbody tr td{
+    padding: 5px;
+}
+
+.tablejovem tbody tr:hover {
+    background-color: #ECEEEF;
+}
+.tablejovem thead tr th:hover{
+    cursor: pointer;
+}
+
+.btn-menu-dados {
+    width: 100%;
+}
+.panel.panel-default {
+    margin-top: 10px;
+}
+.panel-body>.row {
+    margin-top: 10px;
+}
+
+.hide-column {
+    display: none;
+}
+
+.btn-coluna {
+    width: 100%;
+}
+.campo-coluna {
+    width: 100%;
+    border-radius: 5px;
+    background-color: #337AB7;
+    text-align: center;
+    padding: 5px;
+    color: #FFF;
+}
+
+.btn-press {
+    background-color: #5bc0de !important;
+    border-color: #46b8da !important;
+    box-shadow: 0 0 0 0 !important;
+    outline: 0 !important;
+}
+
+.export-exel {
+    display: none;
+    width: 100%;
+}
+.export-exel button {
+    width: 100%;
+}
+
+.loader-btn {
+    width: 100%
+}
+
+.loader, .loader-img {
+    display: none;
+    margin-left: 45%;
+    border: 3px solid #ECEEEF;
+    border-radius: 50%;
+    border-top: 3px solid #4682B4;
+    width: 25px;
+    height: 25px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 0.5s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.input-find {
+    height: 33px;
+    width: 90%;
+    border: 1px solid #CCCCCC;
+    border-radius: 6px;
+    display: none;
+    outline: 0;
+    font-size: 22px;
+}
+
+.local-table {
+    overflow: auto;
+    height: 700px;
+    display: none;
+}
+
+td.colunm-large {
+    min-width: 300px !important;
+    max-width: 300px !important;
+}
+
+td.colunm-middle {
+    min-width: 150px !important;
+    max-width: 150px !important;
+}
+
+td.colunm-little {
+    min-width: 60px !important;
+    max-width: 60px !important;
+}
+
+.titulo-table {
+    display: none;
+    font-family: inherit;
+    color: #4682B4;
+}
+.btn-find{display: none;}
+.btn-print, .btn-titulos, .btn-image{
+    display: none;
+    width: 100%;
+}
+
+.btn-img-donwload{
+    width: 100%;
+}
+#download-logo {display:none;}
+
+@media print {
+
+    .titulo-table {
+        display: block;
+    }
+
+    .print{
+        display: none;
+    }
+
+    .local-table {
+        overflow: initial;
+        height: initial;
+        width: 100%;
+        margin: 0;
+    }
+    .tablejovem{
+        width: 100%;
+        margin-right: 200px !important;
+        margin: 0;
+        background-color: #FFFAFA;
+    }
+
+    body {
+        margin:0;
+        padding:0;
+    }
+
+}
+
+@page {
+    float: left;
+    margin-right: 20mm;
+    margin-bottom: 20mm;
+}

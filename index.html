@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Table</title>
+
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style/dragtable.css" />
+    <link rel="stylesheet" type="text/css" href="style/main.css" />
+
+    <script src="script/jquery.min.js"></script>
+    <script src="script/jquery-ui.min.js"></script>
+    <script src="script/jquery.dragtable.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="script/excellentexport.min.js"></script>
+    <script src="script/html2canvas.js"></script>
+    <script src="script/main.js"></script>
+
+
+</head>
+<body>
+
+Tabela em HTML5 com Bootstrap, com inserção de dados de forma dinâmica passível de edição do titulo das colunas, realizar o drag and drop das colunas, campo para buscar dados específicos dentro da tabela e com possibilidade de imprimir com estilo definido e gerar imagem da tabela gerada.
+
+    <div class="container">
+
+        <div class="row print">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary btn-menu-dados" data-toggle="collapse"  data-parent="#accordion" data-target="#demo">Inserir dados</button>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary btn-menu-dados btn-titulos" data-toggle="collapse"  data-parent="#accordion" data-target="#texto">Titulo da coluna</button>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="input-find">
+                <button type="button" class="btn btn-primary btn-find">
+                    <span class="glyphicon glyphicon-search find-dados"></span>
+                </button>
+            </div>
+            <div class="col-md-1">
+                <div class="loader-img"></div>
+                <div class="canvas-download-logo" style="display:none;"></div>
+                <a id="download-logo">
+                    <button type="button" class="btn btn-default btn-img-donwload">
+                        <span class="glyphicon glyphicon-download-alt"></span>
+                    </button>
+                </a>
+                <button type="button" class="btn btn-primary btn-image">
+                    <span class="glyphicon glyphicon-picture"></span>
+                </button>
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-primary btn-print">
+                    <span class="glyphicon glyphicon-print"></span>
+                </button>
+            </div>
+        </div>
+        <div class="row print">
+            <div class="col-md-12">
+                <div id="demo" class="collapse">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-2"><button type="button" class="btn btn-primary btn-coluna" data-coluna="nome">Jovem Senador</button></div>
+                                <div class="col-md-2"><button type="button" class="btn btn-primary btn-coluna" data-coluna="posi">Posição</button></div>
+                                <div class="col-md-2"><button type="button" class="btn btn-primary btn-coluna" data-coluna="loca">Localidade</button></div>
+                                <div class="col-md-2"><button type="button" class="btn btn-primary btn-coluna" data-coluna="idad">Idade</button></div>
+                                <div class="col-md-2"><button type="button" class="btn btn-primary btn-coluna" data-coluna="inic">Inicio</button></div>
+                                <div class="col-md-2"><button type="button" class="btn btn-primary btn-coluna" data-coluna="sala">Salario</button></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2"><button type="button" class="btn btn-primary btn-coluna" data-coluna="nmae">Nome da Mãe</button></div>
+                                <div class="col-md-2"><button type="button" class="btn btn-primary btn-coluna" data-coluna="npai">Nome do Pai</button></div>
+                                <div class="col-md-2"><button type="button" class="btn btn-primary btn-coluna" data-coluna="cpfm">CPF Mãe</button></div>
+                                <div class="col-md-2"><button type="button" class="btn btn-primary btn-coluna" data-coluna="cpfp">CPF Pai</button></div>
+                                <div class="col-md-2"><button type="button" class="btn btn-danger btn-coluna" data-coluna="empty">Coluna vazia</button></div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default loader-btn">Exportar Excel</button>
+                                    <div class="loader"></div>
+                                    <a class="export-exel" download="jovemSenador.xls" href="#" onclick="return ExcellentExport.excel(this, 'datatable', 'Sheet Name Here');">
+                                        <button type="button" class="btn btn-info">Donwload</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row print">
+            <div class="col-md-12">
+                <div id="texto" class="collapse">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <small>Clique no nome da coluna pra poder editar</small>
+                            <div class="row">
+                                <div class="col-md-2"><div class="campo-coluna" data-coluna="nome" contenteditable="true">Jovem Senador</div></div>
+                                <div class="col-md-2"><div class="campo-coluna" data-coluna="posi" contenteditable="true">Posição</div></div>
+                                <div class="col-md-2"><div class="campo-coluna" data-coluna="loca" contenteditable="true">Localidade</div></div>
+                                <div class="col-md-2"><div class="campo-coluna" data-coluna="idad" contenteditable="true">Idade</div></div>
+                                <div class="col-md-2"><div class="campo-coluna" data-coluna="inic" contenteditable="true">Inicio</div></div>
+                                <div class="col-md-2"><div class="campo-coluna" data-coluna="sala" contenteditable="true">Salario</div></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2"><div class="campo-coluna" data-coluna="nmae" contenteditable="true">Jovem Senador</div></div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 local-table">
+                <h2 class="titulo-table">Tabela Jovem Senador</h2>
+                <table class="tablejovem defaultTable" id="datatable" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th class="empty hide-column colunm-little">Empty</th>
+                            <th class="nome hide-column colunm-large">Jovem Senador</th>
+                            <th class="posi hide-column colunm-large">Posição</th>
+                            <th class="loca hide-column colunm-middle">Localidade</th>
+                            <th class="idad hide-column colunm-middle">Idade</th>
+                            <th class="inic hide-column colunm-middle">Inicio</th>
+                            <th class="sala hide-column colunm-middle">Salario</th>
+                            <th class="nmae hide-column colunm-large">Nome Mãe</th>
+                            <th class="cpfm hide-column colunm-middle">CPF Mãe</th>
+                            <th class="npai hide-column colunm-large">Nome Pai</th>
+                            <th class="cpfp hide-column colunm-middle">CPF Pai</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="empty hide-column colunm-little"></td>
+                            <td class="nome hide-column colunm-large">Pedro Henrique</td>
+                            <td class="posi hide-column colunm-large">Javascript Developer</td>
+                            <td class="loca hide-column colunm-middle">Brasil</td>
+                            <td class="idad hide-column colunm-middle">32</td>
+                            <td class="inic hide-column colunm-middle">2011/04/25</td>
+                            <td class="sala hide-column colunm-middle">$320,800</td>
+                            <td class="nmae hide-column colunm-large">Maria Fernanda da Silva</td>
+                            <td class="cpfm hide-column colunm-middle">036.568.264-69</td>
+                            <td class="npai hide-column colunm-large">João Paulo Martins</td>
+                            <td class="cpfp hide-column colunm-middle">561.584.652-65</td>
+                        </tr>
+                        <tr>
+                            <td class="empty hide-column colunm-little"></td>
+                            <td class="nome hide-column colunm-large">Garrett Winters</td>
+                            <td class="posi hide-column colunm-large">Accountant</td>
+                            <td class="loca hide-column colunm-middle">Tokyo</td>
+                            <td class="idad hide-column colunm-middle">63</td>
+                            <td class="inic hide-column colunm-middle">2011/07/25</td>
+                            <td class="sala hide-column colunm-middle">$170,750</td>
+                            <td class="nmae hide-column colunm-large">Maria Fernanda da Silva</td>
+                            <td class="cpfm hide-column colunm-middle">036.568.264-69</td>
+                            <td class="npai hide-column colunm-large">João Paulo Martins</td>
+                            <td class="cpfp hide-column colunm-middle">561.584.652-65</td>
+                        </tr>
+                        <tr>
+                            <td class="empty hide-column colunm-little"></td>
+                            <td class="nome hide-column colunm-large">Ashton Cox</td>
+                            <td class="posi hide-column colunm-large">Junior Technical Author</td>
+                            <td class="loca hide-column colunm-middle">San Francisco</td>
+                            <td class="idad hide-column colunm-middle">66</td>
+                            <td class="inic hide-column colunm-middle">2009/01/12</td>
+                            <td class="sala hide-column colunm-middle">$86,000</td>
+                            <td class="nmae hide-column colunm-large">Maria Fernanda da Silva</td>
+                            <td class="cpfm hide-column colunm-middle">036.568.264-69</td>
+                            <td class="npai hide-column colunm-large">João Paulo Martins</td>
+                            <td class="cpfp hide-column colunm-middle">561.584.652-65</td>
+                        </tr>
+                        <tr>
+                            <td class="empty hide-column colunm-little"></td>
+                            <td class="nome hide-column colunm-large">Cedric Kelly</td>
+                            <td class="posi hide-column colunm-large">Senior Javascript Developer</td>
+                            <td class="loca hide-column colunm-middle">Edinburgh</td>
+                            <td class="idad hide-column colunm-middle">22</td>
+                            <td class="inic hide-column colunm-middle">2012/03/29</td>
+                            <td class="sala hide-column colunm-middle">$433,060</td>
+                            <td class="nmae hide-column colunm-large">Maria Fernanda da Silva</td>
+                            <td class="cpfm hide-column colunm-middle">036.568.264-69</td>
+                            <td class="npai hide-column colunm-large">João Paulo Martins</td>
+                            <td class="cpfp hide-column colunm-middle">561.584.652-65</td>
+                        </tr>
+                        <tr>
+                            <td class="empty hide-column colunm-little"></td>
+                            <td class="nome hide-column colunm-large">Áiri Satou</td>
+                            <td class="posi hide-column colunm-large">Açcountant</td>
+                            <td class="loca hide-column colunm-middle">Tokyo</td>
+                            <td class="idad hide-column colunm-middle">33</td>
+                            <td class="inic hide-column colunm-middle">2008/11/28</td>
+                            <td class="sala hide-column colunm-middle">$162,700</td>
+                            <td class="nmae hide-column colunm-large">Maria Fernanda da Silva</td>
+                            <td class="cpfm hide-column colunm-middle">036.568.264-69</td>
+                            <td class="npai hide-column colunm-large">João Paulo Martins</td>
+                            <td class="cpfp hide-column colunm-middle">561.584.652-65</td>
+                        </tr>
+                        <tr>
+                            <td class="empty hide-column colunm-little"></td>
+                            <td class="nome hide-column colunm-large">Brielle Williamson</td>
+                            <td class="posi hide-column colunm-large">Integration Specialist</td>
+                            <td class="loca hide-column colunm-middle">New York</td>
+                            <td class="idad hide-column colunm-middle">61</td>
+                            <td class="inic hide-column colunm-middle">2012/12/02</td>
+                            <td class="sala hide-column colunm-middle">$372,000</td>
+                            <td class="nmae hide-column colunm-large">Maria Fernanda da Silva</td>
+                            <td class="cpfm hide-column colunm-middle">036.568.264-69</td>
+                            <td class="npai hide-column colunm-large">João Paulo Martins</td>
+                            <td class="cpfp hide-column colunm-middle">561.584.652-65</td>
+                        </tr>
+                        <tr>
+                            <td class="empty hide-column colunm-little"></td>
+                            <td class="nome hide-column colunm-large">Herrod Chandler</td>
+                            <td class="posi hide-column colunm-large">Sales Assistant</td>
+                            <td class="loca hide-column colunm-middle">San Francisco</td>
+                            <td class="idad hide-column colunm-middle">59</td>
+                            <td class="inic hide-column colunm-middle">2012/08/06</td>
+                            <td class="sala hide-column colunm-middle">$137,500</td>
+                            <td class="nmae hide-column colunm-large">Maria Fernanda da Silva</td>
+                            <td class="cpfm hide-column colunm-middle">036.568.264-69</td>
+                            <td class="npai hide-column colunm-large">João Paulo Martins</td>
+                            <td class="cpfp hide-column colunm-middle">561.584.652-65</td>
+                        </tr>
+                        <tr>
+                            <td class="empty hide-column colunm-little"></td>
+                            <td class="nome hide-column colunm-large">Rhona Davidson</td>
+                            <td class="posi hide-column colunm-large">Integration Specialist</td>
+                            <td class="loca hide-column colunm-middle">Tokyo</td>
+                            <td class="idad hide-column colunm-middle">55</td>
+                            <td class="inic hide-column colunm-middle">2010/10/14</td>
+                            <td class="sala hide-column colunm-middle">$327,900</td>
+                            <td class="nmae hide-column colunm-large">Maria Fernanda da Silva</td>
+                            <td class="cpfm hide-column colunm-middle">036.568.264-69</td>
+                            <td class="npai hide-column colunm-large">João Paulo Martins</td>
+                            <td class="cpfp hide-column colunm-middle">561.584.652-65</td>
+                        </tr>
+                        <tr>
+                            <td class="empty hide-column colunm-little"></td>
+                            <td class="nome hide-column colunm-large">Colleen Hurst</td>
+                            <td class="posi hide-column colunm-large">Javascript Developer</td>
+                            <td class="loca hide-column colunm-middle">San Francisco</td>
+                            <td class="idad hide-column colunm-middle">39</td>
+                            <td class="inic hide-column colunm-middle">2009/09/15</td>
+                            <td class="sala hide-column colunm-middle">$205,500</td>
+                            <td class="nmae hide-column colunm-large">Maria Fernanda da Silva</td>
+                            <td class="cpfm hide-column colunm-middle">036.568.264-69</td>
+                            <td class="npai hide-column colunm-large">João Paulo Martins</td>
+                            <td class="cpfp hide-column colunm-middle">561.584.652-65</td>
+                        </tr>
+                        <tr>
+                            <td class="empty hide-column colunm-little"></td>
+                            <td class="nome hide-column colunm-large">Sonya Frost</td>
+                            <td class="posi hide-column colunm-large">Software Engineer</td>
+                            <td class="loca hide-column colunm-middle">Edinburgh</td>
+                            <td class="idad hide-column colunm-middle">23</td>
+                            <td class="inic hide-column colunm-middle">2008/12/13</td>
+                            <td class="sala hide-column colunm-middle">$103,600</td>
+                            <td class="nmae hide-column colunm-large">Maria Fernanda da Silva</td>
+                            <td class="cpfm hide-column colunm-middle">036.568.264-69</td>
+                            <td class="npai hide-column colunm-large">João Paulo Martins</td>
+                            <td class="cpfp hide-column colunm-middle">561.584.652-65</td>
+                        </tr>
+                        <tr>
+                            <td class="empty hide-column colunm-little"></td>
+                            <td class="nome hide-column colunm-large">Jena Gaines</td>
+                            <td class="posi hide-column colunm-large">Office Manager</td>
+                            <td class="loca hide-column colunm-middle">London</td>
+                            <td class="idad hide-column colunm-middle">30</td>
+                            <td class="inic hide-column colunm-middle">2008/12/19</td>
+                            <td class="sala hide-column colunm-middle">$90,560</td>
+                            <td class="nmae hide-column colunm-large">Maria Fernanda da Silva</td>
+                            <td class="cpfm hide-column colunm-middle">036.568.264-69</td>
+                            <td class="npai hide-column colunm-large">João Paulo Martins</td>
+                            <td class="cpfp hide-column colunm-middle">561.584.652-65</td>
+                        </tr>
+                        <tr>
+                            <td class="empty hide-column colunm-little"></td>
+                            <td class="nome hide-column colunm-large">Quinn Flynn</td>
+                            <td class="posi hide-column colunm-large">Support Lead</td>
+                            <td class="loca hide-column colunm-middle">Edinburgh</td>
+                            <td class="idad hide-column colunm-middle">22</td>
+                            <td class="inic hide-column colunm-middle">2013/03/03</td>
+                            <td class="sala hide-column colunm-middle">$342,000</td>
+                            <td class="nmae hide-column colunm-large">Maria Fernanda da Silva</td>
+                            <td class="cpfm hide-column colunm-middle">036.568.264-69</td>
+                            <td class="npai hide-column colunm-large">João Paulo Martins</td>
+                            <td class="cpfp hide-column colunm-middle">561.584.652-65</td>
+                        </tr>
+                        <tr>
+                            <td class="empty hide-column colunm-little"></td>
+                            <td class="nome hide-column colunm-large">Charde Marshall</td>
+                            <td class="posi hide-column colunm-large">Regional Director</td>
+                            <td class="loca hide-column colunm-middle">San Francisco</td>
+                            <td class="idad hide-column colunm-middle">36</td>
+                            <td class="inic hide-column colunm-middle">2008/10/16</td>
+                            <td class="sala hide-column colunm-middle">$470,600</td>
+                            <td class="nmae hide-column colunm-large">Maria Fernanda da Silva</td>
+                            <td class="cpfm hide-column colunm-middle">036.568.264-69</td>
+                            <td class="npai hide-column colunm-large">João Paulo Martins</td>
+                            <td class="cpfp hide-column colunm-middle">561.584.652-65</td>
+                        </tr>
+                        <tr>
+                            <td class="empty hide-column colunm-little"></td>
+                            <td class="nome hide-column colunm-large">Haley Kennedy</td>
+                            <td class="posi hide-column colunm-large">Senior Marketing Designer</td>
+                            <td class="loca hide-column colunm-middle">London</td>
+                            <td class="idad hide-column colunm-middle">43</td>
+                            <td class="inic hide-column colunm-middle">2012/12/18</td>
+                            <td class="sala hide-column colunm-middle">$313,500</td>
+                            <td class="nmae hide-column colunm-large">Maria Fernanda da Silva</td>
+                            <td class="cpfm hide-column colunm-middle">036.568.264-69</td>
+                            <td class="npai hide-column colunm-large">João Paulo Martins</td>
+                            <td class="cpfp hide-column colunm-middle">561.584.652-65</td>
+                        </tr>
+                        <tr>
+                            <td class="empty hide-column colunm-little"></td>
+                            <td class="nome hide-column colunm-large">Tatyana Fitzpatrick</td>
+                            <td class="posi hide-column colunm-large">Regional Director</td>
+                            <td class="loca hide-column colunm-middle">London</td>
+                            <td class="idad hide-column colunm-middle">19</td>
+                            <td class="inic hide-column colunm-middle">2010/03/17</td>
+                            <td class="sala hide-column colunm-middle">$385,750</td>
+                            <td class="nmae hide-column colunm-large">Maria Fernanda da Silva</td>
+                            <td class="cpfm hide-column colunm-middle">036.568.264-69</td>
+                            <td class="npai hide-column colunm-large">João Paulo Martins</td>
+                            <td class="cpfp hide-column colunm-middle">561.584.652-65</td>
+                        </tr>
+                        <tr>
+                            <td class="empty hide-column colunm-little"></td>
+                            <td class="nome hide-column colunm-large">Michael Silva</td>
+                            <td class="posi hide-column colunm-large">Marketing Designer</td>
+                            <td class="loca hide-column colunm-middle">London</td>
+                            <td class="idad hide-column colunm-middle">66</td>
+                            <td class="inic hide-column colunm-middle">2012/11/27</td>
+                            <td class="sala hide-column colunm-middle">$198,500</td>
+                            <td class="nmae hide-column colunm-large">Maria Fernanda da Silva</td>
+                            <td class="cpfm hide-column colunm-middle">036.568.264-69</td>
+                            <td class="npai hide-column colunm-large">João Paulo Martins</td>
+                            <td class="cpfp hide-column colunm-middle">561.584.652-65</td>
+                        </tr>
+                        <tr>
+                            <td class="empty hide-column colunm-little"></td>
+                            <td class="nome hide-column colunm-large">Paul Byrd</td>
+                            <td class="posi hide-column colunm-large">Chief Financial Officer (CFO)</td>
+                            <td class="loca hide-column colunm-middle">New York</td>
+                            <td class="idad hide-column colunm-middle">64</td>
+                            <td class="inic hide-column colunm-middle">2010/06/09</td>
+                            <td class="sala hide-column colunm-middle">$725,000</td>
+                            <td class="nmae hide-column colunm-large">Maria Fernanda da Silva</td>
+                            <td class="cpfm hide-column colunm-middle">036.568.264-69</td>
+                            <td class="npai hide-column colunm-large">João Paulo Martins</td>
+                            <td class="cpfp hide-column colunm-middle">561.584.652-65</td>
+                        </tr>
+                        <tr>
+                            <td class="empty hide-column colunm-little"></td>
+                            <td class="nome hide-column colunm-large">Gloria Little</td>
+                            <td class="posi hide-column colunm-large">Systems Administrator</td>
+                            <td class="loca hide-column colunm-middle">New York</td>
+                            <td class="idad hide-column colunm-middle">59</td>
+                            <td class="inic hide-column colunm-middle">2009/04/10</td>
+                            <td class="sala hide-column colunm-middle">$237,500</td>
+                            <td class="nmae hide-column colunm-large">Maria Fernanda da Silva</td>
+                            <td class="cpfm hide-column colunm-middle">036.568.264-69</td>
+                            <td class="npai hide-column colunm-large">João Paulo Martins</td>
+                            <td class="cpfp hide-column colunm-middle">561.584.652-65</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
